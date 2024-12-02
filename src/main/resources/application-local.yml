@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  tomcat:
+    connection-timeout: 120000
+    max-threads: 200
+    accept-count: 100
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: never
+    include-exception: false
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:mysql://mysql:3306/authdb?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      connection-test-query: SELECT 1
+      validation-timeout: 5000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        connection:
+          characterEncoding: utf8
+          useUnicode: true
+          CharSet: utf8
+    show-sql: true
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate: INFO
+    com.auth: DEBUG
+    org.springframework.security: DEBUG
